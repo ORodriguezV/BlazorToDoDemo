@@ -6,6 +6,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Linq;
+using BlazorToDoDemo.Shared.Helpers;
+using BlazorToDoDemo.Shared.IRepositories;
+using BlazorToDoDemo.SQLServerDataAccess.Repositories;
 
 namespace BlazorToDoDemo.Server
 {
@@ -22,7 +25,8 @@ namespace BlazorToDoDemo.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.Configure<ConnectionStringsOptions>(Configuration.GetSection(ConnectionStringsOptions.ConnectionStrings));
+            services.AddScoped<IToDoRepository, ToDoRepository>();
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
