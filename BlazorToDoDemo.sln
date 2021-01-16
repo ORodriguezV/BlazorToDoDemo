@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorToDoDemo.Server", "BlazorToDoDemo\Server\BlazorToDoDemo.Server.csproj", "{9933F988-42F5-4D05-A970-19125CC1CFAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorToDoDemo.Server", "BlazorToDoDemo\Server\BlazorToDoDemo.Server.csproj", "{9933F988-42F5-4D05-A970-19125CC1CFAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorToDoDemo.Client", "BlazorToDoDemo\Client\BlazorToDoDemo.Client.csproj", "{B628F731-87BC-4200-A0A3-99B6800AB26C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorToDoDemo.Client", "BlazorToDoDemo\Client\BlazorToDoDemo.Client.csproj", "{B628F731-87BC-4200-A0A3-99B6800AB26C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorToDoDemo.Shared", "BlazorToDoDemo\Shared\BlazorToDoDemo.Shared.csproj", "{D371B12F-B4CD-4DBD-BCB5-DF5A16E95530}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorToDoDemo.Shared", "BlazorToDoDemo\Shared\BlazorToDoDemo.Shared.csproj", "{D371B12F-B4CD-4DBD-BCB5-DF5A16E95530}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BlazorToDoDemo.Database", "BlazorToDoDemo.Database\BlazorToDoDemo.Database.sqlproj", "{3E28ED40-EC9C-4100-9012-10D0F3BD3406}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorToDoDemo.SQLServerDataAccess", "BlazorToDoDemo.SQLServerDataAccess\BlazorToDoDemo.SQLServerDataAccess.csproj", "{E28FC7C4-E70F-49BA-8CC1-A2400E48FD33}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorToDoDemo.SQLServerDataAccess", "BlazorToDoDemo.SQLServerDataAccess\BlazorToDoDemo.SQLServerDataAccess.csproj", "{E28FC7C4-E70F-49BA-8CC1-A2400E48FD33}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

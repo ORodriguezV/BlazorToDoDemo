@@ -1,0 +1,44 @@
+﻿@page "/Edit/{IdToDo:guid}"
+@inject IStatusRepository statusRepository
+@inject IToDoRepository todoRepository
+@inject NavigationManager navigationManager
+
+<h1>Create To Do Item</h1>
+
+@if (StatusList != null && ToDo != null)
+{
+    <Form ToDo="ToDo" StatusList="StatusList" OnValidSubmit="Save" />
+}
+
+@code {
+    [Parameter] public Guid IdToDo { get; set; }
+    private ToDo ToDo;
+    private List<Status> StatusList;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            StatusList = await statusRepository.GetStatus();
+            ToDo = await todoRepository.GetToDo(IdToDo);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+
+    private async Task Save()
+    {
+        try
+        {
+            await todoRepository.UpdateToDo(ToDo);
+            navigationManager.NavigateTo("/");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+
+}

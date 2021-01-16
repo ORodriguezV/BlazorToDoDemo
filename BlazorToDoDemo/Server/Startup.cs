@@ -27,6 +27,7 @@ namespace BlazorToDoDemo.Server
         {
             services.Configure<ConnectionStringsOptions>(Configuration.GetSection(ConnectionStringsOptions.ConnectionStrings));
             services.AddScoped<IToDoRepository, ToDoRepository>();
+            services.AddScoped<IStatusRepository, StatusRepository>();
             services.AddControllersWithViews();
             services.AddRazorPages();
         }

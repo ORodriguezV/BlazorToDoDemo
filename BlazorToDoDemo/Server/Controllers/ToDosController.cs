@@ -1,4 +1,5 @@
-﻿using BlazorToDoDemo.Shared.Entities;
+﻿using BlazorToDoDemo.Shared.DTOs;
+using BlazorToDoDemo.Shared.Entities;
 using BlazorToDoDemo.Shared.IRepositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BlazorToDoDemo.Server.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class ToDosController : ControllerBase
     {
@@ -25,6 +26,12 @@ namespace BlazorToDoDemo.Server.Controllers
             return await toDoRepository.GetToDos();
         }
 
+        [HttpGet]
+        public async Task<ActionResult<List<ToDoDTO>>> GetDTO()
+        {
+            return await toDoRepository.GetToDosDTO();
+        }
+
         [HttpGet("{idToDo}")]
         public async Task<ActionResult<ToDo>> GetById(Guid idToDo)
         {
@@ -34,6 +41,8 @@ namespace BlazorToDoDemo.Server.Controllers
         [HttpPost]
         public async Task<ActionResult> Post(ToDo toDo)
         {
+            // Create the new Guid on the server side to prevent client side "hacking"...
+            toDo.IdToDo = Guid.NewGuid();
             await toDoRepository.CreateToDo(toDo);
             return Created(string.Empty, toDo);
         }

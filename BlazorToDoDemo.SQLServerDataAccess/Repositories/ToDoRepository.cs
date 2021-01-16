@@ -1,4 +1,5 @@
-﻿using BlazorToDoDemo.Shared.Entities;
+﻿using BlazorToDoDemo.Shared.DTOs;
+using BlazorToDoDemo.Shared.Entities;
 using BlazorToDoDemo.Shared.Helpers;
 using BlazorToDoDemo.Shared.IRepositories;
 using Dapper;
@@ -27,16 +28,24 @@ namespace BlazorToDoDemo.SQLServerDataAccess.Repositories
             using (SqlConnection sqlConn = new SqlConnection(this.connectionStringsOptions.DefaultConnection))
             {
                 return (await sqlConn.QueryAsync<ToDo>(@"
-                    select * FROM ToDo")).ToList();
+                    select * from ToDo")).ToList();
             }
         }
-        public async Task<ToDo> GetToDo(Guid idToDo)
+        public async Task<List<ToDoDTO>> GetToDosDTO()
+        {
+            using (SqlConnection sqlConn = new SqlConnection(this.connectionStringsOptions.DefaultConnection))
+            {
+                return (await sqlConn.QueryAsync<ToDoDTO>(@"
+                    select ToDo.*, Status.StatusName from ToDo inner join Status on ToDo.IdStatus = Status.IdStatus")).ToList();
+            }
+        }
+        public async Task<ToDo> GetToDo(Guid IdToDo)
         {
             using (SqlConnection sqlConn = new SqlConnection(this.connectionStringsOptions.DefaultConnection))
             {
                 return (await sqlConn.QueryAsync<ToDo>(@"
-                    select * from ToDo where idToDo = @idToDo", 
-                    new { idToDo })).FirstOrDefault();
+                    select * from ToDo where IdToDo = @IdToDo", 
+                    new { IdToDo })).FirstOrDefault();
             }
         }
         public async Task CreateToDo(ToDo toDo)
@@ -45,16 +54,14 @@ namespace BlazorToDoDemo.SQLServerDataAccess.Repositories
             {
                 await sqlConn.ExecuteAsync(@"
                     insert into ToDo 
-                    (idToDo, subject, description, startDate, dueDate, idStatus)
+                    (IdToDo, Subject, Description, IdStatus)
                     values
-                    (@idToDo, @subject, @description, @startDate, @dueDate, @idStatus)",
+                    (@IdToDo, @Subject, @Description, @IdStatus)",
                     new { 
-                        toDo.idToDo,
-                        toDo.subject,
-                        toDo.description,
-                        toDo.startDate,
-                        toDo.dueDate,
-                        toDo.idStatus
+                        toDo.IdToDo,
+                        toDo.Subject,
+                        toDo.Description,
+                        toDo.IdStatus
                     });
             }
         }
@@ -66,31 +73,27 @@ namespace BlazorToDoDemo.SQLServerDataAccess.Repositories
                     update 
                         ToDo
                     set 
-	                    subject = @subject, 
-	                    description = @description, 
-	                    startDate = @startDate,
-	                    dueDate = @dueDate,
-	                    idStatus = @idStatus
+	                    Subject = @Subject, 
+	                    Description = @Description, 
+	                    IdStatus = @IdStatus
                     where
-	                    idToDo = @idToDo",
+	                    IdToDo = @IdToDo",
                     new
                     {
-                        toDo.idToDo,
-                        toDo.subject,
-                        toDo.description,
-                        toDo.startDate,
-                        toDo.dueDate,
-                        toDo.idStatus
+                        toDo.IdToDo,
+                        toDo.Subject,
+                        toDo.Description,
+                        toDo.IdStatus
                     });
             }
         }
-        public async Task DeleteToDo(Guid idToDo)
+        public async Task DeleteToDo(Guid IdToDo)
         {
             using (SqlConnection sqlConn = new SqlConnection(this.connectionStringsOptions.DefaultConnection))
             {
                 await sqlConn.ExecuteAsync(@"
-                    delete from ToDo where idToDo = @idToDo",
-                    new { idToDo });
+                    delete from ToDo where IdToDo = @IdToDo",
+                    new { IdToDo });
             }
         }
 

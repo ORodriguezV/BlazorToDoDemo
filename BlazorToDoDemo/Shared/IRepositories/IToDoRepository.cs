@@ -1,4 +1,5 @@
 ﻿using BlazorToDoDemo.Shared.Entities;
+using BlazorToDoDemo.Shared.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,8 @@ namespace BlazorToDoDemo.Shared.IRepositories
     public interface IToDoRepository
     {
         Task<List<ToDo>> GetToDos();
+
+        Task<List<ToDoDTO>> GetToDosDTO();
 
         Task<ToDo> GetToDo(Guid idToDo);
 
